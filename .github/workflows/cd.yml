@@ -52,7 +52,6 @@ jobs:
     steps:
       - name: Disparar despliegue en Coolify
         run: |
-          # Guardamos la respuesta y el código HTTP
           RESPONSE=$(curl -s -w "\n%{http_code}" --request POST \
             '${{ secrets.COOLIFY_WEBHOOK }}' \
             --header "Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}")
@@ -64,12 +63,12 @@ jobs:
           echo "Mensaje: $BODY"
 
           if [ "$HTTP_CODE" -ne 200 ] && [ "$HTTP_CODE" -ne 201 ]; then
-            echo "Error al disparar el despliegue en Coolify."
+            echo "Error: La petición fue bloqueada o rechazada."
             exit 1
           fi
 
       - name: Esperar a que el despliegue se estabilice
-        run: sleep 40 # Aumenté a 40 segundos por seguridad
+        run: sleep 40
 
       - name: Verificar /health tras el despliegue
         run: curl --fail --silent --show-error "${{ secrets.APP_URL }}/health"
