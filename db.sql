@@ -1,6 +1,6 @@
--- Ejecutar conectado a la instancia RDS (MySQL/MariaDB)
-CREATE DATABASE IF NOT EXISTS libros_db;
-USE libros_db;
+-- Script de referencia para crear la tabla libros.
+-- En el despliegue con Coolify, este mismo contenido se usa en db-init/init.sql,
+-- que MySQL ejecuta automaticamente la primera vez que crea el volumen de datos.
 
 CREATE TABLE IF NOT EXISTS libros (
   id INT AUTO_INCREMENT PRIMARY KEY,

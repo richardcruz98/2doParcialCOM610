@@ -1,34 +1,37 @@
 # Evidencias pendientes
 
-Este examen requiere evidencia de infraestructura real (EC2, RDS, despliegue
-en GitHub Actions). Ninguna de estas capturas existe todavía porque la
-infraestructura en AWS no ha sido creada. Aquí va la lista exacta de lo que
-falta capturar, para completarla en cuanto haya acceso a una cuenta de AWS:
+Ninguna de estas capturas existe todavía porque el VPS y el Service de Coolify
+no han sido creados/configurados. Lista exacta de lo que falta capturar:
 
-1. **EC2 y reglas de seguridad**
-   - Consola EC2 → instancia en estado "running", con nombre/iniciales visibles.
-   - Pestaña "Security" → reglas de entrada: SSH (22) restringido a tu IP, HTTP (80) abierto.
+1. **Service en Coolify corriendo**
+   - Panel de Coolify → Service con los contenedores `api` y `db` en estado "Running".
+   - Configuración del Service mostrando que `db` no tiene puertos publicados
+     (solo accesible vía red interna).
 
-2. **RDS sin acceso público**
-   - Consola RDS → instancia, mostrando "Publicly accessible: No".
-   - Reglas de entrada del Security Group de RDS: puerto 3306 permitido solo
-     desde el Security Group de EC2.
+2. **Dominio y TLS**
+   - Captura de la configuración de dominio del Service y el certificado TLS
+     emitido automáticamente por Coolify.
 
 3. **Operaciones CRUD y persistencia**
    - Capturas de Postman/curl haciendo POST, GET, PUT y DELETE contra la URL pública.
-   - Una consulta directa a RDS (por ejemplo `SELECT * FROM libros;`) mostrando
-     que los cambios persistieron.
+   - Una consulta ejecutada dentro del contenedor `db` (p. ej. desde la terminal
+     que ofrece Coolify) mostrando `SELECT * FROM libros;` con los cambios persistidos.
 
-4. **Ejecución de pruebas**
-   - Salida de `npm test` en local o en el log de la ejecución de CI en GitHub Actions.
+4. **Ejecución de pruebas (CI)**
+   - Log de una ejecución exitosa de `ci.yml` en GitHub Actions.
 
-5. **Imagen publicada**
-   - Captura del registro de contenedores (Docker Hub, ECR, etc.) mostrando la
-     imagen etiquetada con el SHA del commit.
+5. **Imagen publicada en GHCR**
+   - Captura de la imagen en GitHub Container Registry, etiquetada con el SHA
+     del commit correspondiente.
 
-6. **Despliegue exitoso en GitHub Actions**
-   - Captura del workflow `cd.yml` en verde, con los tres jobs (test, build-and-push,
-     deploy) completados.
+6. **Despliegue exitoso (CD)**
+   - Log de una ejecución exitosa de `cd.yml`, con los tres jobs (test,
+     build-and-push, deploy) en verde, incluyendo la verificación final de
+     `/health` y `/libros`.
 
-Oculta cualquier IP, token o dato sensible antes de subir las capturas reales.
-No se incluyen archivos `.pem`, `.env` ni credenciales en ningún caso.
+7. **(Opcional) Rollback**
+   - Captura de la pestaña Deployments de Coolify mostrando el historial de
+     despliegues y la opción de Rollback.
+
+Oculta cualquier IP, dominio real, token o credencial antes de subir las
+capturas definitivas. No incluir `.env`, claves privadas ni tokens de Coolify/GHCR.

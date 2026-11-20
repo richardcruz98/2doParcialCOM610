@@ -1,0 +1,31 @@
+services:
+  api:
+    # Coolify sobreescribe esta imagen con la que publica GitHub Actions en GHCR
+    image: ghcr.io/richardcruz98/2doParcialCOM610:latest
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - APP_VERSION=${APP_VERSION:-dev}
+    # Sin 'ports': Coolify/Traefik enruta el trafico externo al puerto 3000 interno.
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./db-init:/docker-entrypoint-initdb.d:ro
+    # Sin 'ports': la base de datos solo es visible dentro de la red privada del stack.
+    restart: unless-stopped
+
+volumes:
+  db-data:
