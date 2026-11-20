@@ -1,7 +1,7 @@
 services:
   api:
     # Coolify sobreescribe esta imagen con la que publica GitHub Actions en GHCR
-    image: ghcr.io/richardcruz98/2doParcialCOM610:latest
+    image: ghcr.io/richardcruz98/2doparcialcom610:latest
     environment:
       - DB_HOST=db
       - DB_PORT=3306
