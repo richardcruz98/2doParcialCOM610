@@ -8,7 +8,7 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
-      - APP_VERSION=${APP_VERSION:-dev}
+      - APP_VERSION=${APP_VERSION}
     # Sin 'ports': Coolify/Traefik enruta el trafico externo al puerto 3000 interno.
     depends_on:
       - db

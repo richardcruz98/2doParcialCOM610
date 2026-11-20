@@ -9,7 +9,7 @@ function crearApp() {
   app.get('/health', (req, res) => {
     res.status(200).json({
       status: 'ok',
-      version: process.env.APP_VERSION || 'v2-desplegada-con-exito',
+      version: process.env.APP_VERSION || 'v3-desplegada-con-exito',
     });
   });
 
