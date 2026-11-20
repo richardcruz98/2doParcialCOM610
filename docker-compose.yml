@@ -23,7 +23,7 @@ services:
       - MYSQL_PASSWORD=${DB_PASSWORD}
     volumes:
       - db-data:/var/lib/mysql
-      - ./db-init:/docker-entrypoint-initdb.d:ro
+      - ./db.sql:/docker-entrypoint-initdb.d/init.sql
     # Sin 'ports': la base de datos solo es visible dentro de la red privada del stack.
     restart: unless-stopped
 
