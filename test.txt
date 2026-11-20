@@ -7,3 +7,5 @@
 # prueba 4, Ajustes de dns 2
 
 $ prueba 5, /libros ajustado
+
+$ prueba 6, prueba de deploy
